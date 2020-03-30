@@ -11,6 +11,7 @@ run/
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
+.idea
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
@@ -32,6 +33,8 @@ run/
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+
+gradle
 
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
@@ -137,5 +140,12 @@ gradle-app.setting
 
 ### Gradle Patch ###
 **/build/
+
+##Extras###
+build.gradle
+gradle.properties
+gradlew
+gradlew.bat
+LICENSE
 
 # End of https://www.gitignore.io/api/java,gradle,intellij,forgegradle
