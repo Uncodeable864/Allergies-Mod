@@ -4,5 +4,6 @@
   "item.allergies.allergy_pill": "Allergy Pill",
   "itemGroup.allergyRelief": "Reaction Relief",
   "item.allergies.inhaler_normal": "Normal Inhaler",
-  "item.allergies.inhaler_rescue": "Rescue Inhaler"
+  "item.allergies.inhaler_rescue": "Rescue Inhaler",
+  "effect.allergies.allergic_reaction": "Allergic Reaction"
 }
