@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 public class ItemRescueInhaler extends Item {
     public ItemRescueInhaler() {
         super(new Properties().group(ItemInit.allergyRelief));
-        setRegistryName("inhaler_normal");
+        setRegistryName("inhaler_rescue");
     }
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
