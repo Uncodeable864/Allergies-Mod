@@ -14,11 +14,11 @@ modId="allergies" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 version="${file.jarVersion}" #mandatory
 # A display name for the mod
-displayName="Allergies Mod" #mandatory
+displayName="Allergies & Athsma Mod" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
 #updateJSONURL="http://myurl.me/" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-#displayURL="http://example.com/" #optional
+displayURL="http://kidkoder.net/allergy-and-athsma-mod" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 #logoFile="allergies.png" #optional
 # A text field displayed in the mod UI

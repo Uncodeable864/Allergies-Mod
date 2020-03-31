@@ -2,6 +2,6 @@
 
   "item.allergies.allergy_shot": "Allergy Shot",
   "item.allergies.allergy_pill": "Allergy Pill",
-  "itemGroup.allergyRelief": "Allergy Relief"
-
+  "itemGroup.allergyRelief": "Reaction Relief",
+  "item.allergies.inhaler_normal": "Normal Inhaler"
 }

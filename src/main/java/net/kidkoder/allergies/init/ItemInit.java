@@ -4,9 +4,9 @@ import net.kidkoder.allergies.AllergiesMod;
 import net.kidkoder.allergies.group.GroupAllergyRelief;
 import net.kidkoder.allergies.object.item.ItemAllergyPill;
 import net.kidkoder.allergies.object.item.ItemAllergyShot;
+import net.kidkoder.allergies.object.item.ItemNormalInhaller;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.potion.Effect;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class ItemInit {
 
+    private static Item INHALLER_NORMAL;
     public static ItemGroup allergyRelief = new GroupAllergyRelief();
 
     public static Item ALLERGY_SHOT;
@@ -25,7 +26,8 @@ public class ItemInit {
         event.getRegistry().registerAll(
 
                 ALLERGY_SHOT = new ItemAllergyShot(),
-                ALLERGY_PILL = new ItemAllergyPill()
+                ALLERGY_PILL = new ItemAllergyPill(),
+                INHALLER_NORMAL =  new ItemNormalInhaller()
 
         );
 
