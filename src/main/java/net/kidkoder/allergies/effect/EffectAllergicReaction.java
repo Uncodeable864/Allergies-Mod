@@ -1,4 +1,4 @@
-package net.kidkoder.allergies.potion.effect;
+package net.kidkoder.allergies.effect;
 
 
 import net.minecraft.entity.LivingEntity;
@@ -9,11 +9,10 @@ public class EffectAllergicReaction extends Effect {
     public EffectAllergicReaction() {
         super(EffectType.HARMFUL, 255);
         setRegistryName("allergic_reaction");
-}
+    }
 
     @Override
     public void applyAttributesModifiersToEntity(LivingEntity entity, AbstractAttributeMap attributeMapIn, int amplifier) {
-
         while(entity.getHealth() > 0) {
             float newHealth = entity.getHealth() - (4 * amplifier);
             entity.setHealth(newHealth);
@@ -23,7 +22,6 @@ public class EffectAllergicReaction extends Effect {
                 e.printStackTrace();
             }
         }
-
         super.applyAttributesModifiersToEntity(entity, attributeMapIn, amplifier);
     }
 }

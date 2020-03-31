@@ -1,6 +1,6 @@
 package net.kidkoder.allergies.init;
 
-import net.kidkoder.allergies.potion.effect.EffectAllergicReaction;
+import net.kidkoder.allergies.effect.EffectAllergicReaction;
 import net.minecraft.potion.Effect;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
