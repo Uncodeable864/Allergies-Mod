@@ -8,5 +8,8 @@ import net.minecraft.potion.Potion;
 public class EffectAllergicReaction extends Effect {
     public EffectAllergicReaction() {
         super(EffectType.HARMFUL, 255);
+        setRegistryName("allergic_reaction");
+        
     }
+
 }

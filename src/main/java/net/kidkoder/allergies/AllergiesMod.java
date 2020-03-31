@@ -25,3 +25,13 @@ public class AllergiesMod {
     private void commonSetup(FMLCommonSetupEvent event) {}
 
 }
+
+/*
+*
+* Koded by Kid Koder :)
+*
+* % : ° ° : %
+*      O
+*
+*
+*/
