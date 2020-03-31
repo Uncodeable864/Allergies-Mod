@@ -10,7 +10,11 @@ When you create a new world, the mod automaticly assigns you __allergies__, alon
 #### Items ####
 - Allergy Shots
 - Allergy Pills
-- MORE COMING SOON
+- BOTH Types of Inhalers
+
+#### Effects ####
+
+- Allergic Reaction
 
 ## Past updates ##
 None yet!
