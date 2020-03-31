@@ -1,15 +1,10 @@
 package net.kidkoder.allergies.potion.effect;
 
-import net.kidkoder.allergies.AllergiesMod;
-import net.minecraft.entity.Entity;
+
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
-import net.minecraft.potion.Effects;
-
-import javax.annotation.Nullable;
-
 public class EffectAllergicReaction extends Effect {
     public EffectAllergicReaction() {
         super(EffectType.HARMFUL, 255);
@@ -17,7 +12,18 @@ public class EffectAllergicReaction extends Effect {
 }
 
     @Override
-    public void affectEntity(@Nullable Entity source, @Nullable Entity indirectSource, LivingEntity entityLivingBaseIn, int amplifier, double health) {
-        super.affectEntity(source, indirectSource, entityLivingBaseIn, amplifier, health);
+    public void applyAttributesModifiersToEntity(LivingEntity entity, AbstractAttributeMap attributeMapIn, int amplifier) {
+
+        while(entity.getHealth() > 0) {
+            float newHealth = entity.getHealth() - (4 * amplifier);
+            entity.setHealth(newHealth);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        super.applyAttributesModifiersToEntity(entity, attributeMapIn, amplifier);
     }
 }
