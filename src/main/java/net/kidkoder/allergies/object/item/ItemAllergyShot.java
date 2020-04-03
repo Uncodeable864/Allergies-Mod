@@ -18,16 +18,12 @@ public class ItemAllergyShot extends Item {
     }
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        if(!worldIn.isRemote()) {
-            String name = playerIn.getGameProfile().getName();
+        String name = playerIn.getGameProfile().getName();
             String posX = Double.toString(playerIn.getPositionVec().getX());
             String posZ = Double.toString(playerIn.getPositionVec().getZ());
-            String msgFinal = "Help! " + name + " is having an allergic reaction at (x=" + posX + ", z=" + posZ + ") Come NOW!";
+            String msgFinal = "Help! I'm having an allergic reaction at (x=" + posX + ", z=" + posZ + ") Come NOW!";
             StringTextComponent msg = new StringTextComponent(msgFinal);
-            playerIn.sendMessage(msg);
-            playerIn.addPotionEffect(new EffectInstance(EffectInit.EFFECT_EPINEPHRINE));
-        }
-        else if(worldIn.isRemote) {}
+            worldIn.getClosestPlayer(playerIn.getPositionVec().getX(), playerIn.getPositionVec().getY(), playerIn.getPositionVec().getZ()).sendMessage(msg);
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }

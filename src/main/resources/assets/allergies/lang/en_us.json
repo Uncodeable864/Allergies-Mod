@@ -6,6 +6,5 @@
   "item.allergies.inhaler_normal": "Normal Inhaler",
   "item.allergies.inhaler_rescue": "Rescue Inhaler",
   "effect.allergies.allergic_reaction": "Allergic Reaction",
-  "effect.allergies.epinephrine": "Epinephrine",
-  "effect.allergies.asthma_attack": "Asthma Attack"
+  "effect.allergies.epinephrine": "Epinephrine"
 }

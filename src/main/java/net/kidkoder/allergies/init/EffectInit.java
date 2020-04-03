@@ -1,7 +1,6 @@
 package net.kidkoder.allergies.init;
 
         import net.kidkoder.allergies.effect.EffectAllergicReaction;
-        import net.kidkoder.allergies.effect.EffectAsthmaAttack;
         import net.kidkoder.allergies.effect.EffectEpinephrine;
         import net.minecraft.potion.Effect;
         import net.minecraftforge.event.RegistryEvent;
@@ -21,8 +20,7 @@ public class EffectInit {
         event.getRegistry().registerAll(
 
                 EFFECT_ALLERGIC_REACTION = new EffectAllergicReaction(),
-                EFFECT_EPINEPHRINE = new EffectEpinephrine(),
-                EFFECT_ATHSMA_ATTACK = new EffectAsthmaAttack()
+                EFFECT_EPINEPHRINE = new EffectEpinephrine()
         );
 
     }
