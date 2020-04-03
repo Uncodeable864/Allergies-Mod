@@ -1,7 +1,6 @@
 package net.kidkoder.allergies.object.item;
 
 import net.kidkoder.allergies.init.ItemInit;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
