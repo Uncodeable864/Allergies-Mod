@@ -21,9 +21,10 @@ public class ItemAllergyShot extends Item {
         String name = playerIn.getGameProfile().getName();
             String posX = Double.toString(playerIn.getPositionVec().getX());
             String posZ = Double.toString(playerIn.getPositionVec().getZ());
-            String msgFinal = "Help! I'm having an allergic reaction at (x=" + posX + ", z=" + posZ + ") Come NOW!";
+            String playerName = playerIn.getName().getString();
+            String msgFinal = "Help!" + playerName + "having an allergic reaction at (x=" + posX + ", z=" + posZ + "), Come NOW!";
             StringTextComponent msg = new StringTextComponent(msgFinal);
-            worldIn.getClosestPlayer(playerIn.getPositionVec().getX(), playerIn.getPositionVec().getY(), playerIn.getPositionVec().getZ()).sendMessage(msg);
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+            playerIn.sendMessage(msg);
+            return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }
