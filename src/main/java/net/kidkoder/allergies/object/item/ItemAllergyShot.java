@@ -1,9 +1,11 @@
 package net.kidkoder.allergies.object.item;
 
+import net.kidkoder.allergies.init.EffectInit;
 import net.kidkoder.allergies.init.ItemInit;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.StringTextComponent;
@@ -23,6 +25,7 @@ public class ItemAllergyShot extends Item {
             String msgFinal = "Help! " + name + " is having an allergic reaction at (x=" + posX + ", z=" + posZ + ") Come NOW!";
             StringTextComponent msg = new StringTextComponent(msgFinal);
             playerIn.sendMessage(msg);
+            playerIn.addPotionEffect(new EffectInstance(EffectInit.EFFECT_EPINEPHRINE));
         }
         else if(worldIn.isRemote) {}
         return super.onItemRightClick(worldIn, playerIn, handIn);

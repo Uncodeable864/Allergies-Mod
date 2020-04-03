@@ -16,6 +16,7 @@ When you create a new world, the mod automaticly assigns you __allergies__, alon
 
 - Allergic Reaction
 - Epinephrine
+- Asthma Attack 
 
 ## Past updates ##
 None yet!

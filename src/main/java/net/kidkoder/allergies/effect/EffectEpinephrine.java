@@ -9,7 +9,7 @@ import net.minecraft.potion.EffectType;
 
 public class EffectEpinephrine extends Effect {
     public EffectEpinephrine() {
-        super(EffectType.HARMFUL, 255);
+        super(EffectType.BENEFICIAL, 255);
         setRegistryName("epinephrine");
     }
 
