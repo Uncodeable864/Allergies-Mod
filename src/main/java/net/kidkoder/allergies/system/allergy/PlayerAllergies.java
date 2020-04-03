@@ -31,7 +31,13 @@ public class PlayerAllergies {
         return allergens.contains(allergen);
     }
 
-    public int allergens() {
+    public int allergenAmount() {
         return allergens.size();
     }
+
+    public boolean hasAllergies() {
+        return true;
+    }
+
+
 }
