@@ -2,6 +2,7 @@ package net.kidkoder.allergies.system;
 
 import net.kidkoder.allergies.system.allergy.Allergen;
 import net.kidkoder.allergies.system.allergy.PlayerAllergies;
+import net.kidkoder.allergies.system.asthma.AsthmaSeverity;
 import net.kidkoder.allergies.system.asthma.PlayerAsthma;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
@@ -13,6 +14,7 @@ public class SystemAssignment {
 
     ArrayList<PlayerAllergies> playerAllergies = new ArrayList<>();
     ArrayList<PlayerAsthma> playerAsthma = new ArrayList<>();
+    AsthmaAllergiesPack pack;
 
     public void roll(PlayerEntity player, World world) {
         Random r = new Random();
@@ -45,6 +47,12 @@ public class SystemAssignment {
             }
             playerAllergies.add(new PlayerAllergies(player, allergens));
         }
+        if(hasAsthma) {
+            int index = r.nextInt(5);
+            AsthmaSeverity severity = getSeverityFromIndex(index);
+            playerAsthma.add(new PlayerAsthma(player, severity));
+        }
+        pack = new AsthmaAllergiesPack(playerAllergies, playerAsthma);
     }
 
     public Allergen getAllergenFromIndex(int index) {
@@ -56,6 +64,17 @@ public class SystemAssignment {
             return Allergen.WHEAT;
         } else {
             return Allergen.MILK;
+        }
+    }
+    public AsthmaSeverity getSeverityFromIndex(int index) {
+        if(index == 0) {
+            return AsthmaSeverity.PERSISTENT_MILD;
+        } else if(index == 1) {
+            return AsthmaSeverity.PERSISTENT_MED;
+        } else if(index == 2) {
+            return AsthmaSeverity.PERSISTENT_SEVERE;
+        } else {
+            return AsthmaSeverity.INTERMEDIATE;
         }
     }
     public boolean allergenIsUsed(Allergen[] list, Allergen allergen) {
