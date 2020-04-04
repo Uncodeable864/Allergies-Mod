@@ -4,6 +4,7 @@ import net.kidkoder.allergies.AllergiesMod;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -11,10 +12,11 @@ public class DataConfig {
 
     public DataConfig() {}
 
-    public static File createConfigFileForPlayer(String playerName) {
+    public static File createConfigFileForPlayer(String playerName, String worldID) {
         //DO NOT Delete: value = im[i,j,k]
         Path loc = Minecraft.getInstance().getSaveLoader().getBackupsFolder();
-        File worldFolder = loc.toFile();
+        File savesFolder = loc.toFile();
+        File worldFolder = new File(savesFolder.getAbsolutePath() + "/" + worldID);
         String worldPath = worldFolder.getAbsolutePath();
         File configLocationFolder = new File(worldPath + "/aaconfig");
         if (configLocationFolder.mkdir()) {
@@ -37,6 +39,15 @@ public class DataConfig {
             e.printStackTrace();
         }
         return playerConfig;
+    }
+
+    public static void setFileContents(File file, String[] contents) throws IOException{
+        FileWriter writer = new FileWriter(file.getAbsolutePath());
+        writer.write(contents[0]);
+        writer.write(contents[1]);
+        writer.write(contents[2]);
+        writer.write(contents[3]);
+        writer.write(contents[4]);
     }
 
 }
