@@ -52,7 +52,7 @@ public class SystemAssignment {
             AsthmaSeverity severity = getSeverityFromIndex(index);
             playerAsthma.add(new PlayerAsthma(player, severity));
         }
-        pack = new AsthmaAllergiesPack(playerAllergies, playerAsthma);
+        pack = new AsthmaAllergiesPack(playerAllergies, playerAsthma, playerAllergies.size() + 1, playerAsthma.size() + 1);
     }
 
     public Allergen getAllergenFromIndex(int index) {
