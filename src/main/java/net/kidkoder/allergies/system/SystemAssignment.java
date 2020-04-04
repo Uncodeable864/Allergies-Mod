@@ -4,6 +4,7 @@ import net.kidkoder.allergies.system.allergy.Allergen;
 import net.kidkoder.allergies.system.allergy.PlayerAllergies;
 import net.kidkoder.allergies.system.asthma.PlayerAsthma;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,7 +14,7 @@ public class SystemAssignment {
     ArrayList<PlayerAllergies> playerAllergies = new ArrayList<>();
     ArrayList<PlayerAsthma> playerAsthma = new ArrayList<>();
 
-    public void roll(PlayerEntity player) {
+    public void roll(PlayerEntity player, World world) {
         Random r = new Random();
         String playerName = player.getName().getString();
         int allergyInt = r.nextInt(14);
