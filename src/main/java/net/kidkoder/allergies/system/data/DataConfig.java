@@ -41,7 +41,7 @@ public class DataConfig {
         return playerConfig;
     }
 
-    public static void setFileContents(File file, String[] contents) throws IOException{
+    public static void setFileContents(File file, String[] contents) throws IOException {
         FileWriter writer = new FileWriter(file.getAbsolutePath());
         writer.write(contents[0]);
         writer.write(contents[1]);

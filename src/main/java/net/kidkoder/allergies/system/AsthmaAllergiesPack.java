@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class AsthmaAllergiesPack {
 
-    ArrayList<PlayerAllergies> playerAllergies = new ArrayList<>();
-    ArrayList<PlayerAsthma> playerAsthma = new ArrayList<>();
+    ArrayList<PlayerAllergies> playerAllergies;
+    ArrayList<PlayerAsthma> playerAsthma;
     int indexAl, indexAs;
 
     public AsthmaAllergiesPack(ArrayList<PlayerAllergies> playerAllergies, ArrayList<PlayerAsthma> playerAsthma, int indexAl, int indexAs) {
@@ -30,15 +30,26 @@ public class AsthmaAllergiesPack {
         return playerAllergies;
     }
 
-    public void setPlayerAllergies(ArrayList<PlayerAllergies> playerAllergies) {
+    public void setPlayerAllergies(ArrayList<PlayerAllergies> playerAllergies, int index) {
         this.playerAllergies = playerAllergies;
+        this.indexAl = index;
+
     }
 
     public ArrayList<PlayerAsthma> getPlayerAsthma() {
         return playerAsthma;
+
     }
 
-    public void setPlayerAsthma(ArrayList<PlayerAsthma> playerAsthma) {
+    public void setPlayerAsthma(ArrayList<PlayerAsthma> playerAsthma, int index) {
         this.playerAsthma = playerAsthma;
+        this.indexAs = index;
+    }
+
+    public PlayerAllergies getPlayerAllergiesClass() {
+        return playerAllergies.get(indexAl);
+    }
+    public PlayerAsthma getPlayerAsthmaClass() {
+        return playerAsthma.get(indexAs);
     }
 }

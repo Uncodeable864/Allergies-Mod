@@ -18,23 +18,23 @@ public class ConfigFileContents{
 
     public String[] createNewFileContents() {
         boolean hasAsthma = asthma.hasAsthma();
-        String asthma = "asthma=false";
-        String wheat = "wheat=false";
-        String gold = "gold=false";
-        String milk = "milk=false";
+        String asthma = "asthma=false\n";
+        String wheat = "wheat=false\n";
+        String gold = "gold=false\n";
+        String milk = "milk=false\n";
         String eggs = "eggs=false";
         //Generate lines
         if(allergies.hasAllergen(Allergen.WHEAT)) {
-            wheat = "wheat=true";
+            wheat = "wheat=true\n";
         }
         if(allergies.hasAllergen(Allergen.GOLD)) {
-            gold = "golf=true";
+            gold = "golf=true\n";
         }
         if(allergies.hasAllergen(Allergen.MILK)) {
-            milk = "milk=true";
+            milk = "milk=true\n";
         }
         if(allergies.hasAllergen(Allergen.EGGS)) {
-            eggs = "eggs=true";
+            eggs = "eggs=true\n";
         }
         if(hasAsthma) {
             asthma = "asthma=true";

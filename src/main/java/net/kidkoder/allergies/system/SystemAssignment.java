@@ -4,9 +4,13 @@ import net.kidkoder.allergies.system.allergy.Allergen;
 import net.kidkoder.allergies.system.allergy.PlayerAllergies;
 import net.kidkoder.allergies.system.asthma.AsthmaSeverity;
 import net.kidkoder.allergies.system.asthma.PlayerAsthma;
+import net.kidkoder.allergies.system.data.DataConfig;
+import net.kidkoder.allergies.system.data.parser.file.ConfigFileContents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -53,6 +57,14 @@ public class SystemAssignment {
             playerAsthma.add(new PlayerAsthma(player, severity));
         }
         pack = new AsthmaAllergiesPack(playerAllergies, playerAsthma, playerAllergies.size() + 1, playerAsthma.size() + 1);
+        File configFileForPlayer = DataConfig.createConfigFileForPlayer(playerName, world.getProviderName());
+        ConfigFileContents configFileContents = new ConfigFileContents(pack.getPlayerAsthmaClass(), pack.getPlayerAllergiesClass());
+        String[] lines = configFileContents.createNewFileContents();
+        try {
+            DataConfig.setFileContents(configFileForPlayer, lines);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Allergen getAllergenFromIndex(int index) {
