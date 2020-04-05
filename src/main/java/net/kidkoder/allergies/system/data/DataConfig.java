@@ -20,13 +20,13 @@ public class DataConfig {
         String worldPath = worldFolder.getAbsolutePath();
         File configLocationFolder = new File(worldPath + "/aaconfig");
         if (configLocationFolder.mkdir()) {
-        try {
-            configLocationFolder.createNewFile();
-        } catch (IOException e) {
-            AllergiesMod.LOGGER.error("mkdir() failed!");
-            AllergiesMod.LOGGER.error("Game may crash! Beware");
-            e.printStackTrace();
-        }
+            try {
+                configLocationFolder.createNewFile();
+            } catch (IOException e) {
+                AllergiesMod.LOGGER.error("mkdir() failed!");
+                AllergiesMod.LOGGER.error("Game may crash! Beware");
+                e.printStackTrace();
+            }
         }
         String playerNameLower = playerName.toLowerCase();
         String configFolderPath = configLocationFolder.getAbsolutePath();
