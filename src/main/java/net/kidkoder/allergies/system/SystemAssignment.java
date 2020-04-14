@@ -1,11 +1,11 @@
 package net.kidkoder.allergies.system;
 
+import net.kidkoder.allergies.data.DataConfig;
+import net.kidkoder.allergies.data.parser.file.ConfigFileContents;
 import net.kidkoder.allergies.system.allergy.Allergen;
 import net.kidkoder.allergies.system.allergy.PlayerAllergies;
 import net.kidkoder.allergies.system.asthma.AsthmaSeverity;
 import net.kidkoder.allergies.system.asthma.PlayerAsthma;
-import net.kidkoder.allergies.system.data.DataConfig;
-import net.kidkoder.allergies.system.data.parser.file.ConfigFileContents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
@@ -57,7 +57,7 @@ public class SystemAssignment {
             playerAsthma.add(new PlayerAsthma(player, severity));
         }
         pack = new AsthmaAllergiesPack(playerAllergies, playerAsthma, playerAllergies.size() + 1, playerAsthma.size() + 1);
-        File configFileForPlayer = DataConfig.createConfigFileForPlayer(playerName, world.getProviderName());
+        File configFileForPlayer = DataConfig.createConfigFileForPlayer(playerName);
         ConfigFileContents configFileContents = new ConfigFileContents(pack.getPlayerAsthmaClass(), pack.getPlayerAllergiesClass());
         String[] lines = configFileContents.createNewFileContents();
         try {

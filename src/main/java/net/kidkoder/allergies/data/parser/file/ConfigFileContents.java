@@ -1,4 +1,4 @@
-package net.kidkoder.allergies.system.data.parser.file;
+package net.kidkoder.allergies.data.parser.file;
 
 import net.kidkoder.allergies.system.allergy.Allergen;
 import net.kidkoder.allergies.system.allergy.PlayerAllergies;
