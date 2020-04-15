@@ -1,15 +1,19 @@
+/*
+ * Koded by Kid Koder :)
+ *
+ *  % : ° ° : %
+ *       O
+ */
+
 package net.kidkoder.allergies.system;
 
-import net.kidkoder.allergies.AllergiesMod;
-import net.minecraft.client.Minecraft;
+import net.kidkoder.allergies.capability.allergies.AllergiesProvider;
+import net.kidkoder.allergies.capability.allergies.IAllergies;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.World;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import java.io.File;
-import java.nio.file.Path;
 
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
@@ -19,18 +23,33 @@ public class Events {
 
     @SubscribeEvent
     public void newPlayerJoinWorld(PlayerEvent.PlayerLoggedInEvent event) {
-        AllergiesMod.LOGGER.debug("newPLayerJoinWorldEvent(EntityJoinWorldEvent) started, get instance");
-        PlayerEntity playerEntity = event.getPlayer();
-        World world = event.getPlayer().getEntityWorld();
-        Path loc = Minecraft.getInstance().getSaveLoader().getBackupsFolder();
-        File savesFolder = loc.toFile();
-        String worldID = world.getProviderName();
-        String playerName = playerEntity.getName().getString().toLowerCase();
-        File possibleConfigFile = new File(savesFolder.getAbsolutePath() + "/" + worldID + "/aaconfig/" + playerName + ".aaconfig");
-        AllergiesMod.LOGGER.debug("Located file & in if statement");
-        if(!possibleConfigFile.exists()) {
-            assignment.roll(playerEntity, world);
-            AllergiesMod.LOGGER.debug("Rolled chances");
+        PlayerEntity player = event.getPlayer();
+
+        IAllergies allergies = (IAllergies) player.getCapability(AllergiesProvider.ALLERGIES_CAP);
+
+        if(allergies.rolled()) {
+            StringTextComponent text = new StringTextComponent("Loaded allergies");
+            player.sendStatusMessage(text, true);
+        } if(!allergies.rolled()) {
+            assignment.roll(player, player.getEntityWorld());
+            StringTextComponent text = new StringTextComponent("Allergies rolled");
+            player.sendStatusMessage(text, true);
         }
+
     }
+
+    @SubscribeEvent
+    public void playerClone(PlayerEvent.Clone event) {
+        /*
+
+       Transfer Capability
+         */
+        PlayerEntity newPlayer = event.getPlayer();
+        IAllergies allergies = (IAllergies) newPlayer.getCapability(AllergiesProvider.ALLERGIES_CAP);
+        IAllergies oldAllergies = (IAllergies) event.getOriginal().getCapability(AllergiesProvider.ALLERGIES_CAP, null);
+
+        allergies.setAllergens(oldAllergies.getAllergens());
+
+    }
+
 }

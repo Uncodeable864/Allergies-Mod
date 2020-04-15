@@ -1,7 +1,7 @@
 package net.kidkoder.allergies.system;
 
-import net.kidkoder.allergies.data.DataConfig;
-import net.kidkoder.allergies.data.parser.file.ConfigFileContents;
+import net.kidkoder.allergies.capability.allergies.AllergiesProvider;
+import net.kidkoder.allergies.capability.allergies.IAllergies;
 import net.kidkoder.allergies.system.allergy.Allergen;
 import net.kidkoder.allergies.system.allergy.PlayerAllergies;
 import net.kidkoder.allergies.system.asthma.AsthmaSeverity;
@@ -9,8 +9,6 @@ import net.kidkoder.allergies.system.asthma.PlayerAsthma;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,6 +17,8 @@ public class SystemAssignment {
     ArrayList<PlayerAllergies> playerAllergies = new ArrayList<>();
     ArrayList<PlayerAsthma> playerAsthma = new ArrayList<>();
     AsthmaAllergiesPack pack;
+    Allergen[] allergens = new Allergen[3];
+
 
     public void roll(PlayerEntity player, World world) {
         Random r = new Random();
@@ -41,7 +41,6 @@ public class SystemAssignment {
                 hasMultipleAllergens = true;
             }
             int allergensAmount = r.nextInt(3) + 1;
-            Allergen[] allergens = new Allergen[3];
             for (int i = 0; i < allergensAmount; i++) {
                 int index = r.nextInt(5);
                 Allergen allergen = getAllergenFromIndex(index);
@@ -57,14 +56,8 @@ public class SystemAssignment {
             playerAsthma.add(new PlayerAsthma(player, severity));
         }
         pack = new AsthmaAllergiesPack(playerAllergies, playerAsthma, playerAllergies.size() + 1, playerAsthma.size() + 1);
-        File configFileForPlayer = DataConfig.createConfigFileForPlayer(playerName);
-        ConfigFileContents configFileContents = new ConfigFileContents(pack.getPlayerAsthmaClass(), pack.getPlayerAllergiesClass());
-        String[] lines = configFileContents.createNewFileContents();
-        try {
-            DataConfig.setFileContents(configFileForPlayer, lines);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        IAllergies allergies = (IAllergies) player.getCapability(AllergiesProvider.ALLERGIES_CAP);
+        allergies.setAllergens(new PlayerAllergies(player, allergens));
     }
 
     public Allergen getAllergenFromIndex(int index) {

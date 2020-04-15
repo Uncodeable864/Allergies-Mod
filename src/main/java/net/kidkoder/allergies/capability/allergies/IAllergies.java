@@ -20,4 +20,8 @@ public interface IAllergies {
 
     void setPlayer(PlayerEntity player);
 
+    boolean rolled();
+
+    void setRolled();
+
 }
