@@ -1,6 +1,7 @@
 package net.kidkoder.allergies.system;
 
 import net.kidkoder.allergies.capability.allergies.AllergiesProvider;
+import net.kidkoder.allergies.capability.allergies.CapabilityAllergies;
 import net.kidkoder.allergies.capability.allergies.IAllergies;
 import net.kidkoder.allergies.system.allergy.Allergen;
 import net.kidkoder.allergies.system.allergy.PlayerAllergies;
@@ -56,7 +57,7 @@ public class SystemAssignment {
             playerAsthma.add(new PlayerAsthma(player, severity));
         }
         pack = new AsthmaAllergiesPack(playerAllergies, playerAsthma, playerAllergies.size() + 1, playerAsthma.size() + 1);
-        IAllergies allergies = (IAllergies) player.getCapability(AllergiesProvider.ALLERGIES_CAP);
+        IAllergies allergies = player.getCapability(AllergiesProvider.ALLERGIES_CAP).orElse(new CapabilityAllergies());
         allergies.setAllergens(new PlayerAllergies(player, allergens));
     }
 

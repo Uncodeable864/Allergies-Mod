@@ -6,7 +6,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
 import java.io.DataOutput;
-import java.io.IOException;
 
 public class ObjectNBT implements INBT {
 
@@ -16,10 +15,17 @@ public class ObjectNBT implements INBT {
         this.object = object;
     }
 
-    @Override
-    public void write(DataOutput output) throws IOException {
 
+    public Object getObject() {
+        return object;
     }
+
+    public void setObject(Object object) {
+        this.object = object;
+    }
+
+    @Override
+    public void write(DataOutput output) {}
 
     @Override
     public byte getId() {
