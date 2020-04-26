@@ -1,4 +1,11 @@
-package net.kidkoder.allergies.system;
+/*
+ * Koded by Kid Koder :)
+ *
+ *  % : ° ° : %
+ *       O
+ */
+
+package net.kidkoder.allergies.system.pack;
 
 import net.kidkoder.allergies.system.allergy.PlayerAllergies;
 import net.kidkoder.allergies.system.asthma.PlayerAsthma;

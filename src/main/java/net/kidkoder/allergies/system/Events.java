@@ -11,13 +11,16 @@ import net.kidkoder.allergies.capability.allergies.AllergiesProvider;
 import net.kidkoder.allergies.capability.allergies.IAllergies;
 import net.kidkoder.allergies.command.GetAllergiesCommand;
 import net.kidkoder.allergies.command.TestForAllergyCommand;
+import net.kidkoder.allergies.data.DataConfig;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.common.util.LazyOptional;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+
+import java.io.File;
 
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
@@ -29,20 +32,17 @@ public class Events {
     public static void newPlayerJoinWorldEvent(PlayerEvent.PlayerLoggedInEvent event) {
         //Get player
         PlayerEntity player = event.getPlayer();
-        //Get capability
-        LazyOptional<IAllergies> allergiesLazyOptional = player.getCapability(AllergiesProvider.ALLERGIES_CAP);
-        IAllergies allergies = allergiesLazyOptional.orElseThrow(() -> new RuntimeException("Capabily for allergies SHOULD NOT BE EMPTY(Events.java:34)"));
+        //Get world
+        World world = player.getEntityWorld();
+        //Locate the possible allergies if
+        File possibleFile = DataConfig.getConfigFile(world, player.getDisplayName().getFormattedText().toLowerCase());
 
-        //Detect if allergies have been rolled
-        if(allergies.rolled()) {
-            //Tell player allergies
-            StringTextComponent textLoad = new StringTextComponent("Loaded allergies");
-            player.sendMessage(textLoad);
-        } if(!allergies.rolled()) {
-            assignment.roll(player, player.getEntityWorld());
-            allergies.setRolled();
+        if(!possibleFile.exists()) {
+            assignment.roll(player, world, possibleFile);
+            player.sendMessage(new StringTextComponent("Rolled allergies"));
+        } else {
+            player.sendMessage(new StringTextComponent("Loaded allergies"));
         }
-
 
     }
 
@@ -55,7 +55,7 @@ public class Events {
         IAllergies allergies = player.getCapability(AllergiesProvider.ALLERGIES_CAP).orElseThrow(() -> new RuntimeException("Capabily for allergies SHOULD NOT BE EMTPY(Events.java:56)"));
 
         IAllergies oldAllergies = event.getOriginal().getCapability(AllergiesProvider.ALLERGIES_CAP).orElseThrow(() ->
-                new RuntimeException("Capabily for allergies SHOULD NOT BE EMPTY(Events.java:59)")
+                new RuntimeException("Capability for allergies SHOULD NOT BE EMPTY(Events.java:59)")
         );
 
         allergies.setAllergens(oldAllergies.getAllergens());

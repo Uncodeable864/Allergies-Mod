@@ -28,7 +28,7 @@ public class ConfigFileContents{
             wheat = "wheat=true\n";
         }
         if(allergies.hasAllergen(Allergen.GOLD)) {
-            gold = "golf=true\n";
+            gold = "gold=true\n";
         }
         if(allergies.hasAllergen(Allergen.MILK)) {
             milk = "milk=true\n";
@@ -37,7 +37,7 @@ public class ConfigFileContents{
             eggs = "eggs=true\n";
         }
         if(hasAsthma) {
-            asthma = "asthma=true";
+            asthma = "asthma=true\n";
         }
         //Build file contents
         lines[0] = asthma;

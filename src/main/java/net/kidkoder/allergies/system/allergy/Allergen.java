@@ -2,6 +2,7 @@ package net.kidkoder.allergies.system.allergy;
 
 public enum Allergen {
 
+    NULL,
     GOLD,
     EGGS,
     WHEAT,

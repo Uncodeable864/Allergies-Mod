@@ -1,10 +1,6 @@
 package net.kidkoder.allergies.system.asthma;
 
-import net.kidkoder.allergies.system.allergy.Allergen;
 import net.minecraft.entity.player.PlayerEntity;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class PlayerAsthma {
 
@@ -29,6 +25,11 @@ public class PlayerAsthma {
     }
 
     public boolean hasAsthma() {
-        return true;
+            if (severity.equals(AsthmaSeverity.NULL)) {
+                return false;
+            } else {
+                return true;
+            }
     }
 }
+

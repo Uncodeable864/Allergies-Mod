@@ -9,15 +9,12 @@ package net.kidkoder.allergies.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-import net.kidkoder.allergies.capability.allergies.AllergiesProvider;
-import net.kidkoder.allergies.capability.allergies.CapabilityAllergies;
-import net.kidkoder.allergies.capability.allergies.IAllergies;
+import net.kidkoder.allergies.data.DataConfig;
 import net.kidkoder.allergies.system.allergy.Allergen;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.common.util.LazyOptional;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.text.StringTextComponent;
 
 public class TestForAllergyCommand {
 
@@ -28,13 +25,16 @@ public class TestForAllergyCommand {
         })));
     }
 
-    private static int test(CommandSource source, ServerPlayerEntity player, int allergenInt) {
+    private static int test(CommandSource source, PlayerEntity player, int allergenInt) {
         Allergen allergen = Allergen.intToAllergen(allergenInt);
-        LazyOptional<IAllergies> allergiesLazyOptional = player.getCapability(AllergiesProvider.ALLERGIES_CAP);
-        IAllergies allergies = allergiesLazyOptional.orElseGet(CapabilityAllergies::new);
-        String has = Boolean.toString(allergies.getAllergens().hasAllergen(allergen));
-        String allergenString = Allergen.allergenToString(allergen);
-        source.sendFeedback(new TranslationTextComponent("commands.testAllergy.run", allergenString,has), true);
+
+        boolean hasAllergen = DataConfig.decodeConfig(DataConfig.getConfigFile(player.getEntityWorld(), player.getDisplayName().getFormattedText().toLowerCase()), player).getAllergies().hasAllergen(allergen);
+
+
+        StringTextComponent msg = new StringTextComponent(Allergen.allergenToString(allergen) + " is " + hasAllergen);
+
+        player.sendMessage(msg);
+
         return 1;
     }
 }

@@ -8,17 +8,16 @@
 package net.kidkoder.allergies.command;
 
 import com.mojang.brigadier.CommandDispatcher;
-import net.kidkoder.allergies.capability.allergies.AllergiesProvider;
-import net.kidkoder.allergies.capability.allergies.CapabilityAllergies;
-import net.kidkoder.allergies.capability.allergies.IAllergies;
+import net.kidkoder.allergies.data.DataConfig;
 import net.kidkoder.allergies.system.allergy.Allergen;
 import net.kidkoder.allergies.system.allergy.PlayerAllergies;
+import net.kidkoder.allergies.system.pack.SingleAllergiesAsthmaPack;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.common.util.LazyOptional;
+import net.minecraft.world.World;
 
 public class GetAllergiesCommand {
 
@@ -36,25 +35,26 @@ public class GetAllergiesCommand {
     }
 
     public static int getAllergies(CommandSource source, PlayerEntity player) {
-        LazyOptional<IAllergies> allergiesLazyOptional = player.getCapability(AllergiesProvider.ALLERGIES_CAP);
-        IAllergies iAllergies = allergiesLazyOptional.orElseGet(CapabilityAllergies::new);
-        PlayerAllergies allergies = iAllergies.getAllergens();
 
-        String hasGold = Boolean.toString(allergies.hasAllergen(Allergen.GOLD));
-        StringTextComponent gold = new StringTextComponent("Gold: " + hasGold);
+        World world = player.getEntityWorld();
+
+        SingleAllergiesAsthmaPack pack = DataConfig.decodeConfig(DataConfig.getConfigFile(world, player.getDisplayName().getFormattedText().toLowerCase()), player);
+
+        PlayerAllergies allergies = pack.getAllergies();
+
+        StringTextComponent gold = new StringTextComponent("Gold: " + allergies.hasAllergen(Allergen.GOLD));
         player.sendMessage(gold);
 
-        String hasEggs = Boolean.toString(allergies.hasAllergen(Allergen.EGGS));
-        StringTextComponent eggs = new StringTextComponent("Gold: " + hasEggs);
+        StringTextComponent eggs = new StringTextComponent("Eggs: " + allergies.hasAllergen(Allergen.EGGS));
         player.sendMessage(eggs);
 
-        String hasWheat = Boolean.toString(allergies.hasAllergen(Allergen.WHEAT));
-        StringTextComponent wheat = new StringTextComponent("Wheat: " + hasWheat);
+        StringTextComponent wheat = new StringTextComponent("Wheat: " + allergies.hasAllergen(Allergen.WHEAT));
         player.sendMessage(wheat);
 
-        String hasMilk = Boolean.toString(allergies.hasAllergen(Allergen.MILK));
-        StringTextComponent milk = new StringTextComponent("Wheat: " + hasMilk);
+        StringTextComponent milk = new StringTextComponent("Milk: " + allergies.hasAllergen(Allergen.MILK));
         player.sendMessage(milk);
+
+
 
         return 1;
     }

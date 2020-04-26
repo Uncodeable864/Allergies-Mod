@@ -36,7 +36,15 @@ public class PlayerAllergies {
     }
 
     public boolean hasAllergies() {
-        return true;
+        ArrayList<Allergen> allergenNulled = new ArrayList<>();
+
+        allergenNulled.add(0, Allergen.NULL);
+
+        if (allergens.equals(allergenNulled)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 

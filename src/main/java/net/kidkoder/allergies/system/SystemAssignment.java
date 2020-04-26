@@ -1,15 +1,17 @@
 package net.kidkoder.allergies.system;
 
-import net.kidkoder.allergies.capability.allergies.AllergiesProvider;
-import net.kidkoder.allergies.capability.allergies.CapabilityAllergies;
-import net.kidkoder.allergies.capability.allergies.IAllergies;
+import net.kidkoder.allergies.data.DataConfig;
+import net.kidkoder.allergies.data.parser.file.ConfigFileContents;
 import net.kidkoder.allergies.system.allergy.Allergen;
 import net.kidkoder.allergies.system.allergy.PlayerAllergies;
 import net.kidkoder.allergies.system.asthma.AsthmaSeverity;
 import net.kidkoder.allergies.system.asthma.PlayerAsthma;
+import net.kidkoder.allergies.system.pack.AsthmaAllergiesPack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -21,7 +23,9 @@ public class SystemAssignment {
     Allergen[] allergens = new Allergen[3];
 
 
-    public void roll(PlayerEntity player, World world) {
+    public void roll(PlayerEntity player, World world, File configFile) {
+        PlayerAsthma asthma;
+        PlayerAllergies allergies;
         Random r = new Random();
         String playerName = player.getName().getString();
         int allergyInt = r.nextInt(14);
@@ -49,16 +53,24 @@ public class SystemAssignment {
                     allergens[i] = allergen;
                 }
             }
-            playerAllergies.add(new PlayerAllergies(player, allergens));
+            allergies = new PlayerAllergies(player, allergens);
+        } else {
+            allergies = new PlayerAllergies(player, Allergen.NULL);
         }
         if(hasAsthma) {
-            int index = r.nextInt(5);
+            int index = r.nextInt(4);
             AsthmaSeverity severity = getSeverityFromIndex(index);
-            playerAsthma.add(new PlayerAsthma(player, severity));
+            asthma = new PlayerAsthma(player, severity);
+        } else {
+            asthma = new PlayerAsthma(player, AsthmaSeverity.NULL);
         }
-        pack = new AsthmaAllergiesPack(playerAllergies, playerAsthma, playerAllergies.size() + 1, playerAsthma.size() + 1);
-        IAllergies allergies = player.getCapability(AllergiesProvider.ALLERGIES_CAP).orElse(new CapabilityAllergies());
-        allergies.setAllergens(new PlayerAllergies(player, allergens));
+        ConfigFileContents contentsObj = new ConfigFileContents(asthma, allergies);
+        String[] contentList = contentsObj.createNewFileContents();
+        try {
+            DataConfig.setFileContents(configFile, contentList);
+        } catch (IOException e) {
+            System.err.println("roll() Failed!");
+        }
     }
 
     public Allergen getAllergenFromIndex(int index) {
