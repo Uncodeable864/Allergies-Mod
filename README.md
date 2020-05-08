@@ -23,3 +23,6 @@ None yet!
 
 ## Where to download ##
 This mod can't be downloaded.
+
+## Contributing. ##
+See [CONTRIBUTING.MD](CONTRIBUTING.md)
