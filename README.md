@@ -1,5 +1,5 @@
 # Allergies Mod by Kid Koder
- *__1 in 13__ children have food allergies*. Plus, about 40% of children with food allergies are allergic to one food. *And __1 in 12__ kids have athsma*. Oh, and don't forget seasanol allergies!
+ *__1 in 13__ children have food allergies*. *And __1 in 12__ kids have athsma*. Oh, and don't forget sesonal allergies!
  
  ## Help educate the world about allergies and asthma. ##
 Only a certain hanful of people have __allergies__ and/or __athsma__. And that means everyone else doesn't know what it is like. I have even heard stories that people get __bullied__ about it. 
